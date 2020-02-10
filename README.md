@@ -81,6 +81,6 @@ reward: [实现](tgym/envs/reward.py)
   - [ ] 增加更多, 更有效的reward函数
   - [ ] 增加observation中信息(因子挖掘)
 
-# 线上联系
+线上交流方式
 
 - QQ群: 451958126
