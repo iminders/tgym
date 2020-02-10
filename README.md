@@ -83,4 +83,4 @@ reward: [实现](tgym/envs/reward.py)
 
 线上交流方式
 
-- QQ群: 451958126
+- QQ群: 477860214
