@@ -88,7 +88,7 @@ def daily_return_with_chl_penalty(daily_return, highs, lows,
 
 
 def get_reward_func(name="simple"):
-    logger.info("use reward function: %s" % name)
+    logger.info("tgym.envs.reward use reward function: %s" % name)
     if name == "simple":
         return simple
     if name == "daily_return":
