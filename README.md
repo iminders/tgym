@@ -2,8 +2,6 @@
 
 基于[OpenAI Gym](https://gym.openai.com/)的程序化交易环境模拟器, 旨在为沪深A股基于增强学习的交易算法提供方便使用, 接近真实市场的交易环境
 
-线上交流QQ群: 451958126
-
 基于tgym的RL算法baselines repo: [tbase](https://github.com/iminders/tbase)
 
 ## Features
@@ -82,3 +80,7 @@ reward: [实现](tgym/envs/reward.py)
 
   - [ ] 增加更多, 更有效的reward函数
   - [ ] 增加observation中信息(因子挖掘)
+
+# 线上联系
+
+- QQ群: 451958126
