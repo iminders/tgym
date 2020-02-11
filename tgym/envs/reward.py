@@ -72,8 +72,8 @@ def daily_return_add_buy_sell_penalty(daily_return, highs, lows,
     # 如果出现买价>卖价 增加一个较大的惩罚
     for i in range(n):
         if sell_prices[i] < buy_prices[i]:
-            reward -= 1.0
-    reward = reward
+            reward -= 0.05
+    reward = reward * 100
     return reward
 
 
