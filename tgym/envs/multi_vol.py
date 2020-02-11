@@ -22,13 +22,15 @@ class MultiVolEnv(BaseEnv):
     """
 
     def __init__(self, market=None, investment=100000.0, look_back_days=10,
-                 used_infos=["equities_hfq_info", "indexs_info"]):
+                 used_infos=["equities_hfq_info", "indexs_info"],
+                 reward_fn="daily_return_add_price_bound",
+                 log_deals=False):
         """
         investment: 初始资金
         look_back_days: 向前取数据的天数
         """
         super(MultiVolEnv, self).__init__(market, investment, look_back_days,
-                                          used_infos)
+                                          used_infos, reward_fn, log_deals)
         self.action_space = 4 * self.n
         self.portfolio_info_size = 2 * self.n
         self.input_size = self.market_info_size + self.portfolio_info_size

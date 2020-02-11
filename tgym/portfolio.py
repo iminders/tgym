@@ -13,7 +13,8 @@ class Portfolio:
     def __init__(self,
                  buy_commission_rate=0.001, sell_commission_rate=0.0015,
                  min_commission=5.0, round_lot=100,
-                 divide_rate_threshold=1.005, code="000001.SZ"):
+                 divide_rate_threshold=1.005, code="000001.SZ",
+                 log_deals=False):
         # 市值
         self.market_value = 0.0
         # 持仓量
@@ -52,6 +53,8 @@ class Portfolio:
         self.round_lot = round_lot
         self.divide_rate_threshold = divide_rate_threshold
         self.code = code
+        # 是否打印订单记录
+        self.log_deals = log_deals
 
     def update_value_percent(self, total_value):
         """
@@ -95,7 +98,11 @@ class Portfolio:
         self.frozen_volume += volume
         self.all_transaction_cost += transaction_cost
         cash_change = -amount - transaction_cost
-        logging.debug("buy price: %.3f, volume: %d" % (price, volume))
+        if self.log_deals and volume > 0:
+            logging.info("buy %s price: %.3f, volume: %d" % (self.code,
+                                                             price, volume))
+        logging.debug("buy %s price: %.3f, volume: %d" % (self.code,
+                                                          price, volume))
         return cash_change, price, volume
 
     def is_divide(self, divide_rate):
@@ -131,7 +138,11 @@ class Portfolio:
         self.sellable -= volume
         self.all_transaction_cost += transaction_cost
         cash_change = amount - transaction_cost
-        logging.debug("sell price: %.3f, volume: %d" % (price, volume))
+        if self.log_deals and volume > 0:
+            logging.info("sell %s price: %.3f, volume: %d" % (self.code,
+                                                              price, volume))
+        logging.debug("sell %s price: %.3f, volume: %d" % (self.code,
+                                                           price, volume))
         return cash_change, price, volume
 
     def _submit_order(self, side=None, price=None, volume=None):

@@ -12,7 +12,7 @@ from tgym.portfolio import Portfolio
 class BaseEnv(gym.Env):
     def __init__(self, market=None, investment=100000.0, look_back_days=10,
                  used_infos=["equities_hfq_info", "indexs_info"],
-                 reward_fn="daily_return_add_price_bound"):
+                 reward_fn="daily_return_add_price_bound", log_deals=False):
         """
         investment: 初始资金
         look_back_days: 向前取数据的天数
@@ -34,6 +34,7 @@ class BaseEnv(gym.Env):
         self.returns = []
         self.reward_fn = get_reward_func(name=reward_fn)
         self.reward_fn_name = reward_fn
+        self.log_deals = log_deals
 
     def get_market_info_size(self):
         size = 0
@@ -189,7 +190,8 @@ class BaseEnv(gym.Env):
         # 每只股的 portfolio
         self.portfolios = []
         for code in self.codes:
-            self.portfolios.append(Portfolio(code=code))
+            self.portfolios.append(Portfolio(code=code,
+                                             log_deals=self.log_deals))
         self.obs = self.get_init_obs()
         self.portfolio_value_logs = []
         return self.obs
@@ -200,6 +202,8 @@ class BaseEnv(gym.Env):
         """
         self.action = action
         self.info = {"orders": []}
+        if self.log_deals:
+            logger.info("=" * 50 + "%s" % self.current_date + "=" * 50)
         logger.debug("=" * 50 + "%s" % self.current_date + "=" * 50)
         logger.debug("current_time_id: %d, portfolio: %.1f" %
                      (self.current_time_id, self.portfolio_value))

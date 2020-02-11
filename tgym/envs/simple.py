@@ -21,13 +21,13 @@ class SimpleEnv(BaseEnv):
 
     def __init__(self, market=None, investment=100000.0, look_back_days=10,
                  used_infos=["equities_hfq_info", "indexs_info"],
-                 reward_fn="daily_return_add_price_bound"):
+                 reward_fn="daily_return_add_price_bound", log_deals=False):
         """
         investment: 初始资金
         look_back_days: 向前取数据的天数
         """
         super(SimpleEnv, self).__init__(market, investment, look_back_days,
-                                        used_infos, reward_fn)
+                                        used_infos, reward_fn, log_deals)
         # 股票数量
         self.n = 1
         self.action_space = 2
