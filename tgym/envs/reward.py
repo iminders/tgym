@@ -1,7 +1,17 @@
 # -*- coding:utf-8 -*-
 from tgym.logger import logger
 
+mapping = {}
 
+
+def register(name):
+    def _thunk(func):
+        mapping[name] = func
+        return func
+    return _thunk
+
+
+@register("simple")
 def simple(daily_return, *args):
     if daily_return <= 0:
         return -1
@@ -13,6 +23,7 @@ def daily_return(daily_return, *args):
     return daily_return
 
 
+@register("daily_return_add_count_rate")
 def daily_return_add_count_rate(daily_return, highs, lows,
                                 closes, sell_prices, buy_prices):
     fail, success, profit_count, loss_count = 0, 0, 0
@@ -53,6 +64,20 @@ def mean_squared_error(a, b):
     return v / n
 
 
+@register("daily_return_add_buy_sell_penalty")
+def daily_return_add_buy_sell_penalty(daily_return, highs, lows,
+                                      closes, sell_prices, buy_prices):
+    reward = daily_return
+    n = len(highs)
+    # 如果出现买价>卖价 增加一个较大的惩罚
+    for i in range(n):
+        if sell_prices[i] < buy_prices[i]:
+            reward -= 1.0
+    reward = reward
+    return reward
+
+
+@register("daily_return_add_price_bound")
 def daily_return_add_price_bound(daily_return, highs, lows,
                                  closes, sell_prices, buy_prices):
     reward = daily_return
@@ -69,6 +94,7 @@ def daily_return_add_price_bound(daily_return, highs, lows,
     return reward
 
 
+@register("daily_return_with_chl_penalty")
 def daily_return_with_chl_penalty(daily_return, highs, lows,
                                   closes, sell_prices, buy_prices):
     reward = daily_return_add_price_bound(daily_return, highs, lows, closes,
@@ -87,18 +113,24 @@ def daily_return_with_chl_penalty(daily_return, highs, lows,
     return reward
 
 
-def get_reward_func(name="simple"):
+def get_reward_func(name):
+    """
+    If you want to register your own reward function, you just need:
+    Usage Example:
+    -------------
+    from tgym.envs.reward import register
+    @register("your_reward_function_name")
+    def your_reward_function(**kwargs):
+        ...
+        return reward_fn
+    """
     logger.info("tgym.envs.reward use reward function: %s" % name)
-    if name == "simple":
-        return simple
-    if name == "daily_return":
-        return daily_return
-    if name == "daily_return_add_count_rate":
-        return daily_return_add_count_rate
-    if name == "daily_return_add_price_bound":
-        return daily_return_add_price_bound
-    if name == "daily_return_with_chl_penalty":
-        return daily_return_with_chl_penalty
+    if callable(name):
+        return name
+    elif name in mapping:
+        return mapping[name]
+    else:
+        raise ValueError('Unknown network type: {}'.format(name))
 
 
 def main():
