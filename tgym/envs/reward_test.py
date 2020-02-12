@@ -22,7 +22,7 @@ class TestReward(unittest.TestCase):
         highs, lows, closes = [100], [90], [95]
         sell_prices, buy_prices = [98], [92]
         v = fn(0.03, highs, lows, closes, sell_prices, buy_prices)
-        self.assertEqual(3, v)
+        self.assertEqual(0.09, v)
 
 
 if __name__ == '__main__':
