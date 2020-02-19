@@ -22,6 +22,15 @@ py_library(
     ],
 )
 
+py_test(
+    name = "market_test",
+    srcs = ["market_test.py"],
+    deps = [
+        ":py_default_lib",
+        ":py_logger_lib",
+    ],
+)
+
 py_library(
     name = "py_scenario_lib",
     srcs = [
@@ -29,14 +38,5 @@ py_library(
     ],
     deps = [
         "//tgym:py_default_lib",
-    ],
-)
-
-py_test(
-    name = "market_test",
-    srcs = ["market_test.py"],
-    deps = [
-        ":py_default_lib",
-        ":py_logger_lib",
     ],
 )
