@@ -73,7 +73,7 @@ reward: [实现](tgym/envs/reward.py)
   - step2. `docker-compose up`
 - Send pull request
 
-## 扩展Scenario
+### 扩展Scenario
 
 可以参考[average.py](tgym/envs/average.py)的写法
 
