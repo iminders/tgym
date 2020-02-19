@@ -65,6 +65,12 @@ reward: [实现](tgym/envs/reward.py)
 - [x] daily_return_add_price_bound: 收益率 - 最高最低价与买卖价差MSE
 - [x] daily_return_with_chl_penalty: 收益率 - [close,high,low]与买卖价格相应惩罚
 
+## Test
+
+```
+docker-compose up
+```
+
 ## 扩展Scenario
 
 可以参考[average.py](tgym/envs/average.py)的写法
