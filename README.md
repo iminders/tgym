@@ -57,7 +57,7 @@ export TUSHARE_TOKEN=YOUR_TOKEN
 - [x] 多支股票, 均匀分仓操作
 - [x] 多支股票，支持仓位控制
 
-reward: [实现](tgym/envs/reward.py)
+[reward functions](tgym/envs/reward.py):
 
 - [x] simple: 盈利=1,否则=-1
 - [x] daily_return: 每日的收益率
