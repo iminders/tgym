@@ -1,24 +1,25 @@
 workspace(name = "com_github_iminders_tgym")
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-http_archive(
+git_repository(
     name = "rules_python",
-    url = "https://github.com/bazelbuild/rules_python/releases/download/0.0.1/rules_python-0.0.1.tar.gz",
-    sha256 = "aa96a691d3a8177f3215b14b0edc9641787abaaa30363a080165d06ab65e1161",
+    remote = "https://github.com/bazelbuild/rules_python.git",
+    # NOT VALID: Replace with actual Git commit SHA.
+    commit = "38f86fb55b698c51e8510c807489c9f4e047480e",
 )
+
 load("@rules_python//python:repositories.bzl", "py_repositories")
 py_repositories()
 # Only needed if using the packaging rules.
 load("@rules_python//python:pip.bzl", "pip_repositories")
 pip_repositories()
 
-
 load("@rules_python//python:pip.bzl", "pip_import")
 
 # Create a central repo that knows about the dependencies needed for
 # requirements.txt.
-pip_import( 
+pip_import(
    name = "pip_deps",
    requirements = "//:requirements.txt",
 )

@@ -1,6 +1,7 @@
 package(default_visibility = ["//visibility:public"])
 
-load("@pip_deps//:requirements.bzl", "requirement")
+# load("@pip_deps//:requirements.bzl", "requirement")
+# load("@rules_python//python:defs.bzl", "py_test", "py_library")
 
 py_library(
     name = "py_logger_lib",
@@ -18,7 +19,6 @@ py_library(
     ],
     deps = [
         "//tgym:py_logger_lib",
-        requirement("pandas"),
     ],
 )
 
@@ -38,5 +38,6 @@ py_test(
     deps = [
         ":py_default_lib",
         ":py_logger_lib",
+
     ],
 )
