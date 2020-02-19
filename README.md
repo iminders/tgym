@@ -65,6 +65,14 @@ reward: [实现](tgym/envs/reward.py)
 - [x] daily_return_add_price_bound: 收益率 - 最高最低价与买卖价差MSE
 - [x] daily_return_with_chl_penalty: 收益率 - [close,high,low]与买卖价格相应惩罚
 
+## Contribution
+- Fork this repo
+- Add or change code
+- Test
+  - step1. 设置[docker-compose](docker-compose.yml)需要的环境变量: BAZEL_USER_ROOT, OUTPUT_DIR, TUSHARE_TOKEN
+  - step2. `docker-compose up`
+- Send pull request
+
 ## 扩展Scenario
 
 可以参考[average.py](tgym/envs/average.py)的写法
@@ -75,7 +83,7 @@ reward: [实现](tgym/envs/reward.py)
 
 ## TODO List(欢迎一起完善)
 
-- [ ] [Bazel build](https://bazel.build/)
+- [x] [Bazel build](https://bazel.build/)
 - [ ] 更全面的测试用例
 - [ ] 场景增加
 
