@@ -117,7 +117,7 @@ class TestAverage(unittest.TestCase):
         while not done:
             # buy and hold, 持仓不动
             _, _, done, _, _ = self.env.step(action, only_update=False)
-        self.assertEqual(104933.3, round(self.env.portfolio_value, 1))
+        self.assertEqual(104933, int(self.env.portfolio_value))
         if self.show_plot:
             self.plot_portfolio_value("static")
 

@@ -96,7 +96,7 @@ class TestMultiVol(unittest.TestCase):
         action = [0.1, -1, -0.1, 0, 0.1, -1, -0.1, 0]
         while not done:
             _, _, done, _, _ = self.env.step(action, only_update=False)
-        self.assertEqual(104933.3, round(self.env.portfolio_value, 1))
+        self.assertEqual(104933, int(self.env.portfolio_value))
         if self.show_plot:
             self.plot_portfolio_value("static")
 
