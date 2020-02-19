@@ -1,0 +1,13 @@
+version: '3.0'
+
+services:
+  bazel:
+    image: aiminders/library:bazel.latest
+    environment:
+      TUSHARE_TOKEN: ${TUSHARE_TOKEN}
+    command:
+      bash /root/tgym/docker-compose.sh
+    volumes:
+      - .:/root/tgym
+      - ${BAZEL_USER_ROOT}:/root/cache/bazel
+      - ${OUTPUT_DIR}:/root/output
