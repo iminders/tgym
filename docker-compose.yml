@@ -2,7 +2,7 @@ version: '3.0'
 
 services:
   bazel:
-    image: aiminders/library:bazel.latest
+    image: aiminders/trade:tgym
     environment:
       TUSHARE_TOKEN: ${TUSHARE_TOKEN}
     command:

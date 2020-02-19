@@ -33,16 +33,15 @@ RUN apt-get -y update --fix-missing && \
     apt-get -y autoremove && \
     rm -rf /var/lib/apt-get/lists/*
 
-RUN pip install tushare gym matplotlib
-
 ENV CODE_DIR /root/trade
+
+ARG BUILD_TIME
+ENV BUILD_TIME=${BUILD_TIME}
 
 # install tgym
 WORKDIR  $CODE_DIR
 RUN cd $CODE_DIR
-RUN echo "rm -rf tgym"
 RUN rm -rf tgym
-RUN echo "tgym"
 RUN git clone https://github.com/iminders/tgym.git
 # Clean up pycache and pyc files
 RUN cd $CODE_DIR/tgym && rm -rf __pycache__ && \

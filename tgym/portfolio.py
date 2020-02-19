@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 
-import logging
+from tgym.logger import logger
 
 
 class Portfolio:
@@ -99,10 +99,10 @@ class Portfolio:
         self.all_transaction_cost += transaction_cost
         cash_change = -amount - transaction_cost
         if self.log_deals and volume > 0:
-            logging.info("buy %s price: %.3f, volume: %d" % (self.code,
-                                                             price, volume))
-        logging.debug("buy %s price: %.3f, volume: %d" % (self.code,
-                                                          price, volume))
+            logger.info("buy %s price: %.3f, volume: %d" % (self.code,
+                                                            price, volume))
+        logger.debug("buy %s price: %.3f, volume: %d" % (self.code,
+                                                         price, volume))
         return cash_change, price, volume
 
     def is_divide(self, divide_rate):
@@ -112,7 +112,7 @@ class Portfolio:
     def update_before_trade(self, divide_rate):
         # 如果有拆分
         if self.is_divide(divide_rate):
-            logging.debug("update_before_trade: %s divide_rate: %.3f" % (
+            logger.debug("update_before_trade: %s divide_rate: %.3f" % (
                 self.code, divide_rate))
             self.volume = int(divide_rate * self.volume)
         self.sellable = self.volume
@@ -139,14 +139,14 @@ class Portfolio:
         self.all_transaction_cost += transaction_cost
         cash_change = amount - transaction_cost
         if self.log_deals and volume > 0:
-            logging.info("sell %s price: %.3f, volume: %d" % (self.code,
-                                                              price, volume))
-        logging.debug("sell %s price: %.3f, volume: %d" % (self.code,
-                                                           price, volume))
+            logger.info("sell %s price: %.3f, volume: %d" % (self.code,
+                                                             price, volume))
+        logger.debug("sell %s price: %.3f, volume: %d" % (self.code,
+                                                          price, volume))
         return cash_change, price, volume
 
     def _submit_order(self, side=None, price=None, volume=None):
-        logging.debug("portfolio: submit_order %s, %4s, %5.2f, %6d" % (
+        logger.debug("portfolio: submit_order %s, %4s, %5.2f, %6d" % (
             self.code, side, price, volume))
         if side == "sell":
             return self.sell(price=price, volume=volume)
@@ -155,7 +155,7 @@ class Portfolio:
 
     def _sell_all_stock(self, price):
         if self.sellable == 0:
-            logging.debug("%s sell_all_stock sellable is 0" % self.code)
+            logger.debug("%s sell_all_stock sellable is 0" % self.code)
         return self._submit_order(side="sell", price=price,
                                   volume=self.sellable)
 
@@ -189,7 +189,7 @@ class Portfolio:
             if volume > 0:
                 return self._submit_order("buy", price, volume)
             if volume == 0:
-                logging.debug("order_value failed: 0 order quantity")
+                logger.debug("order_value failed: 0 order quantity")
                 return 0, 0, 0
 
         elif amount < 0:
