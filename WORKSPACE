@@ -1,13 +1,13 @@
 workspace(name = "com_github_iminders_tgym")
 
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-git_repository(
-    name = "rules_python",
-    commit = "38f86fb55b698c51e8510c807489c9f4e047480e",
-    remote = "https://github.com/bazelbuild/rules_python.git",
+http_archive(
+    name = "bazel_federation",
+    url = "https://github.com/bazelbuild/bazel-federation/releases/download/0.0.1/bazel_federation-0.0.1.tar.gz",
+    sha256 = "506dfbfd74ade486ac077113f48d16835fdf6e343e1d4741552b450cfc2efb53",
 )
 
-load("@rules_python//python:repositories.bzl", "py_repositories")
+load("@bazel_federation//:repositories.bzl", "rules_python_deps")
 
-py_repositories()
+rules_python_deps()
