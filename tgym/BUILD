@@ -13,6 +13,7 @@ py_library(
     srcs = [
         "market.py",
         "portfolio.py",
+        "scenario.py",
     ],
     deps = [
         "//tgym:py_logger_lib",
@@ -34,15 +35,5 @@ py_test(
     deps = [
         ":py_default_lib",
         ":py_logger_lib",
-    ],
-)
-
-py_library(
-    name = "py_scenario_lib",
-    srcs = [
-        "scenario.py",
-    ],
-    deps = [
-        "//tgym:py_default_lib",
     ],
 )
