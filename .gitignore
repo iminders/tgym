@@ -7,3 +7,4 @@
 *.pkl
 *tmp/
 .ropeproject/
+bazel-*
