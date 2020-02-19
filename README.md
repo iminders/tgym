@@ -69,9 +69,8 @@ reward: [实现](tgym/envs/reward.py)
 - Fork this repo
 - Add or change code
 - Test
-  ```
-  docker-compose up
-  ```
+  - step1. 设置[docker-compose](docker-compose.yml)需要的环境变量: BAZEL_USER_ROOT, OUTPUT_DIR, TUSHARE_TOKEN
+  - step2. `docker-compose up`
 - Send pull request
 
 ## 扩展Scenario
