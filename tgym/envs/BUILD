@@ -21,8 +21,8 @@ py_test(
     ],
     deps = [
         ":py_default_lib",
-        "//tgym:py_logger_lib",
         "//tgym:py_default_lib",
+        "//tgym:py_logger_lib",
     ],
 )
 
@@ -33,8 +33,8 @@ py_test(
     ],
     deps = [
         ":py_default_lib",
-        "//tgym:py_logger_lib",
         "//tgym:py_default_lib",
+        "//tgym:py_logger_lib",
     ],
 )
 
@@ -45,8 +45,8 @@ py_test(
     ],
     deps = [
         ":py_default_lib",
-        "//tgym:py_logger_lib",
         "//tgym:py_default_lib",
+        "//tgym:py_logger_lib",
     ],
 )
 
