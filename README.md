@@ -75,7 +75,7 @@ reward: [实现](tgym/envs/reward.py)
 
 ## TODO List(欢迎一起完善)
 
-- [ ] [Bazel build](https://bazel.build/)
+- [x] [Bazel build](https://bazel.build/)
 - [ ] 更全面的测试用例
 - [ ] 场景增加
 
