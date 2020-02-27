@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import random
+import time
 
 import gym
 import numpy as np
@@ -64,9 +65,9 @@ class BaseEnv(gym.Env):
                                                                   "close"])
             else:
                 # 停牌时
-                highs.appen(0)
-                lows.appen(0)
-                closes.appen(0)
+                highs.append(0)
+                lows.append(0)
+                closes.append(0)
         return highs, lows, closes
 
     def update_reward(self, sell_prices, buy_prices):

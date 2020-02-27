@@ -60,7 +60,9 @@ def mean_squared_error(a, b):
     v = 0.0
     n = len(a)
     for i in range(n):
-        v += (10.0 * (1 - b[i] / a[i])) ** 2
+        # 停牌时 error设置为0
+        if a[i] != 0:
+            v += (10.0 * (1 - b[i] / a[i])) ** 2
     return v / n
 
 
@@ -103,6 +105,8 @@ def daily_return_with_chl_penalty(daily_return, highs, lows,
     close_error_sum = 0
     n = len(highs)
     for i in range(n):
+        if closes[i] == 0:
+            continue
         if sell_prices[i] < closes[i]:
             close_error = (closes[i] - sell_prices[i]) * 10 / closes[i]
             close_error_sum += close_error ** 2
