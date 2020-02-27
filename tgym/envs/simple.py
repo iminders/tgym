@@ -104,3 +104,14 @@ class SimpleEnv(BaseEnv):
             self.current_date = self.dates[self.current_time_id]
         self.pre_cash = self.cash
         return obs
+
+    def get_buy_close_action(self, datestr):
+        """
+        在datestr以收盘价买进的action, 用于buy_and_hold策略, 给出的action为: [0, v]
+        v为收盘价对应的action值
+        """
+        pct = self.market.codes_history[self.code].loc[datestr,  "pct_chg"]
+        buy_act_v = self.scale_pct_to_action_value(pct)
+        # NOTE: 卖出价格默认为：昨日收盘价
+        sell_act_v = 0
+        return [sell_act_v, buy_act_v]

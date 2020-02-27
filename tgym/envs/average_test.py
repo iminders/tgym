@@ -82,9 +82,8 @@ class TestAverage(unittest.TestCase):
         self.assertEqual(10.34, buy_price)
 
     def test_buy_and_hold(self):
-        # 20190116, 收盘涨 2.38%
-        action = [0, 0.238, 0, 0.103]
         self.env.reset()
+        action = self.env.get_buy_close_action(datestr=self.env.current_date)
         obs, reward, done, info, _ = self.env.step(action, only_update=False)
         action = [0] * 4
         while not done:
@@ -96,9 +95,8 @@ class TestAverage(unittest.TestCase):
 
     def test_random(self):
         random.seed(0)
-        # 20190116, 收盘涨 2.38%
-        action = [0, 0.238, 0, 0.103]
         self.env.reset()
+        action = self.env.get_buy_close_action(datestr=self.env.current_date)
         obs, reward, done, info, _ = self.env.step(action, only_update=False)
         while not done:
             # buy and hold, 持仓不动
@@ -109,9 +107,8 @@ class TestAverage(unittest.TestCase):
             self.plot_portfolio_value("random_action")
 
     def test_static(self):
-        # 20190116, 收盘涨 2.38%
-        action = [0, 0.238, 0, 0.103]
         self.env.reset()
+        action = self.env.get_buy_close_action(datestr=self.env.current_date)
         obs, reward, done, info, _ = self.env.step(action, only_update=False)
         action = [0.1, -0.1, 0.1, -0.1]
         while not done:
@@ -120,6 +117,11 @@ class TestAverage(unittest.TestCase):
         self.assertEqual(104933, int(self.env.portfolio_value))
         if self.show_plot:
             self.plot_portfolio_value("static")
+
+    def test_get_buy_close_action(self):
+        actual = self.env.get_buy_close_action(datestr='20190116')
+        expect = [0, 0.23438, 0, 0.10334000000000002]
+        self.assertEqual(expect, actual)
 
 
 if __name__ == '__main__':
