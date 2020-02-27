@@ -122,3 +122,18 @@ class AverageEnv(BaseEnv):
             self.current_date = self.dates[self.current_time_id]
         self.pre_cash = self.cash
         return obs
+
+    def get_buy_close_action(self, datestr):
+        """
+        在datestr以收盘价买进的action, 用于buy_and_hold策略,
+        给出的action为: [0, v] * self.n, v为收盘价对应的action值
+        """
+        action = []
+        for code in self.codes:
+            pct = self.market.codes_history[code].loc[datestr,  "pct_chg"]
+            buy_act_v = self.scale_pct_to_action_value(pct)
+            # NOTE: 卖出价格默认为：昨日收盘价
+            sell_act_v = 0
+            action.append(sell_act_v)
+            action.append(buy_act_v)
+        return action

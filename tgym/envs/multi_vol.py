@@ -128,3 +128,28 @@ class MultiVolEnv(BaseEnv):
             self.current_date = self.dates[self.current_time_id]
         self.pre_cash = self.cash
         return obs
+
+    def scale_vol_percent_to_action_v(self, percent):
+        """
+        将持仓比例转化为action值, percent取值[0, 1], action取值[-1, 1]
+        """
+        return percent * 2.0 - 1.0
+
+    def get_buy_close_action(self, datestr):
+        """
+        在datestr以平均分仓收盘价买进的action, 用于buy_and_hold策略,
+        给出的action为: [0, -1, v, vol_v] * self.n, v为收盘价对应的action值
+        vol_v: 为均匀分仓时的值
+        """
+        action = []
+        avg_vol_percent = 1.0 / self.n
+        for code in self.codes:
+            pct = self.market.codes_history[code].loc[datestr,  "pct_chg"]
+            buy_act_v = self.scale_pct_to_action_value(pct)
+            # 0: 表示昨日收盘价
+            sell_act_v = 0
+            # -1: 表示卖出量为0
+            sell_volume_v = -1
+            vol_v = self.scale_vol_percent_to_action_v(avg_vol_percent)
+            action.extend([sell_act_v, sell_volume_v, buy_act_v, vol_v])
+        return action

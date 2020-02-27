@@ -231,3 +231,9 @@ class BaseEnv(gym.Env):
 
     def get_random_action(self):
         return [random.uniform(-1, 1) for i in range(self.action_space)]
+
+    def scale_pct_to_action_value(self, pct):
+        """
+        将pct值scale到action值上, pct取值: [-10.0, 10.0], action的取值: [-1, 1]
+        """
+        return pct * 0.1
