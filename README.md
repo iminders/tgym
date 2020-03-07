@@ -48,7 +48,7 @@ export TUSHARE_TOKEN=YOUR_TOKEN
 场景                   | 实现           | action                                           | observation | reward | 使用例子
 -------------------- | ------------ | ------------------------------------------------ | ----------- | ------ | -----------------
 单支股票, 全仓操作, 每日先卖再买   | simple.py    | [scaled_sell_price, scaled_buy_price                                  | 市场信息+部分账户信息 | 可参数选择  | simple_test.py
-多支股票平均分仓, 每日先卖再买     | average.py   | [scaled_sell_price, scaled_buy_price * n                              | 市场信息+部分账户信息 | 可参数选择  | average_test.py
+多支股票平均分仓, 每日先卖再买     | average.py   | [scaled_sell_price, scaled_buy_price] * n                              | 市场信息+部分账户信息 | 可参数选择  | average_test.py
 多支股票, 支持仓位控制, 每日先卖再买 | multi_vol.py | [scaled_sell_price, scaled_sell_volume, scaled_buy_price, scaled_buy_volume] * n | 市场信息+部分账户信息 | 可参数选择  | multi_vol_test.py
 
 场景:
