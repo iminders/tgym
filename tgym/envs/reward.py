@@ -56,13 +56,20 @@ def daily_return_add_count_rate(daily_return, highs, lows,
     return reward
 
 
-def mean_squared_error(a, b):
+def mean_squared_error(a, b, scaled=10.0):
+    """
+    arguments:
+        a: list of values
+        b: list of values
+        scaled: 误差调整倍率
+    return:
+        mean squared error
+    """
     v = 0.0
     n = len(a)
     for i in range(n):
-        # 停牌时 error设置为0
         if a[i] != 0:
-            v += (10.0 * (1 - b[i] / a[i])) ** 2
+            v += (scaled * (1 - b[i] / a[i])) ** 2
     return v / n
 
 
