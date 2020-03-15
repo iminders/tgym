@@ -1,4 +1,4 @@
-# https://github.com/iminders/services/blob/master/docker-images/aiminders/bazel/latest.Dockerfile
+# https://github.com/iminders/bazel/blob/master/Dockerfile
 FROM registry.cn-hangzhou.aliyuncs.com/aiminders/bazel:latest
 
 RUN apt-get -y update --fix-missing && \
