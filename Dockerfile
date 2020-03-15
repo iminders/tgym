@@ -1,5 +1,5 @@
 # https://github.com/iminders/services/blob/master/docker-images/aiminders/bazel/latest.Dockerfile
-FROM aiminders/library:bazel.latest
+FROM registry.cn-hangzhou.aliyuncs.com/aiminders/bazel:latest
 
 RUN apt-get -y update --fix-missing && \
     apt-get -y upgrade --fix-missing && \
