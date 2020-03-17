@@ -1,6 +1,6 @@
 # tgym
 
-本项目已经迁移致: https://github.com/iminders/tenvs
+本项目已经迁移到: https://github.com/iminders/tenvs, 这个repo不再维护
 
 基于[OpenAI Gym](https://gym.openai.com/)的程序化交易环境模拟器, 旨在为沪深A股基于增强学习的交易算法提供方便使用, 接近真实市场的交易环境
 
